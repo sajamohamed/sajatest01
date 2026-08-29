@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>مقياس الاحتراق الوظيفي | أثر</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    background:
+        radial-gradient(circle at top right, rgba(199,122,203,.18), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(255,255,255,.08), transparent 25%),
+        linear-gradient(160deg,#501E72 0%,#582E81 55%,#321348 100%);
+    min-height: 100vh;
+    color: white;
+    direction: rtl;
+}
+
+.container {
+    width: 92%;
+    max-width: 820px;
+    margin: auto;
+    padding: 30px 0 60px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* HERO */
+
+.hero {
+    text-align: center;
+    padding: 20px 15px 25px;
+}
+
+.logo {
+    width: 200px;
+    max-width: 60%;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.brand {
+    font-size: 17px;
+    margin-bottom: 15px;
+    color: #f5eafb;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.subtitle {
+    color: #eadff0;
+    line-height: 1.9;
+    font-size: 17px;
+    max-width: 650px;
+    margin: auto;
+}
+
+.line {
+    width: 170px;
+    height: 4px;
+    border-radius: 20px;
+    background: linear-gradient(to left,#fff,#c77acb);
+    margin: 25px auto;
+}
+
+.dimensions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.dimension {
+    padding: 11px 17px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.18);
+}
+
+/* CARDS */
+
+.card {
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 24px;
+    padding: 28px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 14px 35px rgba(0,0,0,.14);
+}
+
+.center {
+    text-align: center;
+}
+
+.card h2 {
+    margin-bottom: 20px;
+}
+
+.small-text {
+    color: #dfd2e7;
+    line-height: 1.8;
+}
+
+/* FORM */
+
+.field {
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 16px;
+}
+
+input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.25);
+    background: rgba(255,255,255,.08);
+    color: white;
+    outline: none;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: #cabbd3;
+}
+
+input:focus {
+    border-color: #d79cdb;
+    background: rgba(255,255,255,.12);
+}
+
+.error {
+    display: none;
+    color: #ffd1dc;
+    margin-top: 7px;
+    font-size: 13px;
+}
+
+.notice {
+    padding: 16px;
+    background: rgba(255,255,255,.07);
+    border-right: 4px solid #c77acb;
+    border-radius: 12px;
+    margin: 22px 0;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+/* BUTTONS */
+
+.main-btn {
+    width: 100%;
+    border: 0;
+    background: white;
+    color: #501E72;
+    border-radius: 15px;
+    padding: 17px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.main-btn:hover {
+    transform: translateY(-2px);
+    background: #f6eef8;
+}
+
+.secondary-btn {
+    padding: 13px 20px;
+    border-radius: 13px;
+    border: 1px solid rgba(255,255,255,.28);
+    background: rgba(255,255,255,.08);
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+/* QUESTION PAGE */
+
+.assessment-header {
+    margin-bottom: 24px;
+}
+
+.assessment-title {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 9px;
+    color: #eadff0;
+    font-size: 14px;
+}
+
+.progress-track {
+    height: 9px;
+    background: rgba(255,255,255,.12);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to left,#fff,#c77acb);
+    transition: width .35s ease;
+}
+
+.section-badge {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 8px 15px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.16);
+    font-size: 14px;
+}
+
+.question-number {
+    font-size: 15px;
+    color: #d8c8e2;
+    margin-bottom: 14px;
+}
+
+.question-text {
+    font-size: 24px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* ANSWERS */
+
+.answers {
+    display: grid;
+    gap: 11px;
+}
+
+.answer-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    padding: 14px 17px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(255,255,255,.07);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .2s;
+}
+
+.answer-btn:hover {
+    background: rgba(255,255,255,.15);
+    transform: translateX(-3px);
+}
+
+.answer-score {
+    width: 35px;
+    height: 35px;
+    background: rgba(255,255,255,.12);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* RESULTS */
+
+.result-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.result-header h1 {
+    margin-bottom: 10px;
+}
+
+.person-info {
+    margin: 20px 0;
+    padding: 16px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.07);
+    line-height: 1.9;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.result-card {
+    padding: 20px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.16);
+}
+
+.result-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.result-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.score {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.level {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 7px 13px;
+    background: rgba(255,255,255,.12);
+    border-radius: 20px;
+}
+
+.score-track {
+    margin-top: 15px;
+    height: 8px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255,255,255,.12);
+}
+
+.score-fill {
+    height: 100%;
+    background: linear-gradient(to left,#fff,#c77acb);
+}
+
+.final-box {
+    margin-top: 25px;
+    padding: 23px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.17);
+}
+
+.final-box h2 {
+    margin-bottom: 14px;
+}
+
+.final-box p {
+    line-height: 2;
+    color: #f1e8f4;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.actions button {
+    flex: 1;
+    min-width: 170px;
+}
+
+.footer {
+    text-align: center;
+    padding-top: 25px;
+    font-size: 13px;
+    color: #cbbad6;
+}
+
+/* PRINT */
+
+@media print {
+
+    body {
+        background: white;
+        color: #222;
+    }
+
+    .hero,
+    .actions,
+    .footer {
+        display: none;
+    }
+
+    .card,
+    .result-card,
+    .final-box {
+        color: #222;
+        background: white;
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+
+    .small-text,
+    .person-info,
+    .final-box p {
+        color: #333;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width:600px) {
+
+    .container {
+        width: 94%;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .logo {
+        width: 165px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .question-text {
+        font-size: 20px;
+    }
+
+    .answer-btn {
+        font-size: 14px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- START PAGE -->
+
+<section id="startPage">
+
+    <div class="hero">
+
+        <img src="logo.png" class="logo" alt="شعار أثر">
+
+        <div class="brand">
+            أثر للتطوير والوعي الشخصي
+        </div>
+
+        <h1>
+            مقياس الاحتراق الوظيفي
+        </h1>
+
+        <p class="subtitle">
+            اكتشف مستوى الإجهاد والاستنزاف المهني لديك
+            من خلال أداة تقييم تفاعلية مبسطة.
+        </p>
+
+        <div class="line"></div>
+
+        <div class="dimensions">
+            <div class="dimension">🔴 الاستنزاف العاطفي</div>
+            <div class="dimension">🔵 التبلد والسلبية</div>
+            <div class="dimension">🟢 الكفاءة والإنجاز</div>
+        </div>
+
+    </div>
+
+
+    <div class="card center">
+
+        <h2>
+            أثر للتطوير والوعي الشخصي
+        </h2>
+
+        <p class="small-text">
+            أداة تدريبية للتقييم الذاتي والوعي المهني
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            ✍️ أدخل بياناتك للبدء
+        </h2>
+
+
+        <div class="field">
+
+            <label>
+                الاسم الكامل *
+            </label>
+
+            <input
+                id="fullName"
+                placeholder="اكتب اسمك هنا..."
+            >
+
+            <div class="error" id="nameError">
+                الرجاء إدخال الاسم
+            </div>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                المسمى الوظيفي *
+            </label>
+
+            <input
+                id="jobTitle"
+                placeholder="اكتب مسماك الوظيفي..."
+            >
+
+            <div class="error" id="jobError">
+                الرجاء إدخال المسمى الوظيفي
+            </div>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                المؤسسة أو جهة العمل *
+            </label>
+
+            <input
+                id="organization"
+                placeholder="اسم المؤسسة أو الجهة..."
+            >
+
+            <div class="error" id="organizationError">
+                الرجاء إدخال المؤسسة
+            </div>
+
+        </div>
+
+
+        <div class="notice">
+
+            <strong>تنبيه:</strong>
+
+            هذه أداة تدريبية للتوعية والتقييم الذاتي
+            مستوحاة من أبعاد الاحتراق الوظيفي،
+            وليست أداة تشخيص طبي ولا النسخة الرسمية
+            من Maslach Burnout Inventory.
+
+        </div>
+
+
+        <button
+            class="main-btn"
+            onclick="startAssessment()"
+        >
+            ابدأ التقييم ←
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ASSESSMENT -->
+
+<section id="assessmentPage" class="hidden">
+
+    <div class="assessment-header">
+
+        <div class="assessment-title">
+
+            <img src="logo.png"
+                 class="logo"
+                 style="width:120px">
+
+            <h2>
+                مقياس الاحتراق الوظيفي
+            </h2>
+
+        </div>
+
+
+        <div class="progress-info">
+
+            <span id="progressText">
+                السؤال 1 من 30
+            </span>
+
+            <span id="progressPercent">
+                3%
+            </span>
+
+        </div>
+
+
+        <div class="progress-track">
+
+            <div
+                id="progressBar"
+                class="progress-bar">
+            </div>
+
+        </div>
+
+        <div
+            id="sectionBadge"
+            class="section-badge">
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div
+            id="questionNumber"
+            class="question-number">
+        </div>
+
+        <div
+            id="questionText"
+            class="question-text">
+        </div>
+
+        <div
+            id="answers"
+            class="answers">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RESULT PAGE -->
+
+<section id="resultPage" class="hidden">
+
+    <div class="result-header">
+
+        <img src="logo.png"
+             class="logo"
+             style="width:150px">
+
+        <h1>
+            نتيجة التقييم
+        </h1>
+
+        <p class="small-text">
+            قراءة توعوية لمؤشرات الاحتراق الوظيفي
+        </p>
+
+    </div>
+
+
+    <div
+        id="personInfo"
+        class="person-info">
+    </div>
+
+
+    <div class="result-grid">
+
+        <div class="result-card">
+
+            <div class="result-top">
+
+                <div class="result-title">
+                    🔴 الاستنزاف العاطفي
+                </div>
+
+                <div
+                    class="score"
+                    id="emotionalScore">
+                </div>
+
+            </div>
+
+            <div
+                class="level"
+                id="emotionalLevel">
+            </div>
+
+            <div class="score-track">
+                <div
+                    class="score-fill"
+                    id="emotionalFill">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="result-card">
+
+            <div class="result-top">
+
+                <div class="result-title">
+                    🔵 التبلد والسلبية
+                </div>
+
+                <div
+                    class="score"
+                    id="cynicismScore">
+                </div>
+
+            </div>
+
+            <div
+                class="level"
+                id="cynicismLevel">
+            </div>
+
+            <div class="score-track">
+                <div
+                    class="score-fill"
+                    id="cynicismFill">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="result-card">
+
+            <div class="result-top">
+
+                <div class="result-title">
+                    🟢 الكفاءة والإنجاز
+                </div>
+
+                <div
+                    class="score"
+                    id="achievementScore">
+                </div>
+
+            </div>
+
+            <div
+                class="level"
+                id="achievementLevel">
+            </div>
+
+            <div class="score-track">
+                <div
+                    class="score-fill"
+                    id="achievementFill">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="final-box">
+
+        <h2 id="finalTitle">
+        </h2>
+
+        <p id="finalInterpretation">
+        </p>
+
+    </div>
+
+
+    <div class="notice">
+
+        <strong>مهم:</strong>
+
+        هذه النتيجة مخصصة للتوعية والتدريب ولا تعتبر
+        تشخيصًا نفسيًا أو طبيًا.
+        إذا كانت الضغوط تؤثر بصورة كبيرة على حياتك
+        أو صحتك فمن الأفضل الاستعانة بمتخصص مؤهل.
+
+    </div>
+
+
+    <div class="actions">
+
+        <button
+            class="main-btn"
+            onclick="window.print()">
+
+            🖨️ طباعة / حفظ النتيجة
+
+        </button>
+
+
+        <button
+            class="secondary-btn"
+            onclick="restartAssessment()">
+
+            🔄 إعادة التقييم
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<div class="footer">
+    أثر للتطوير والوعي الشخصي
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   QUESTIONS
+========================= */
+
+const questions = [
+
+{
+section:"emotional",
+text:"أشعر باستنزاف عاطفي بسبب عملي."
+},
+
+{
+section:"emotional",
+text:"أشعر بالتعب النفسي في نهاية يوم العمل."
+},
+
+{
+section:"emotional",
+text:"أشعر أن عملي يستهلك معظم طاقتي."
+},
+
+{
+section:"emotional",
+text:"أشعر بالإرهاق عندما أفكر في بداية يوم عمل جديد."
+},
+
+{
+section:"emotional",
+text:"أشعر أن متطلبات العمل أصبحت أكبر من قدرتي على التحمل."
+},
+
+{
+section:"emotional",
+text:"أشعر بالإجهاد بعد قضاء وقت طويل في التعامل مع الآخرين."
+},
+
+{
+section:"emotional",
+text:"أحتاج إلى وقت طويل لاستعادة طاقتي بعد انتهاء العمل."
+},
+
+{
+section:"emotional",
+text:"أشعر أن ضغوط العمل أصبحت مستمرة."
+},
+
+{
+section:"emotional",
+text:"أشعر أنني لم أعد أمتلك الطاقة نفسها التي كنت أمتلكها سابقًا."
+},
+
+{
+section:"emotional",
+text:"أشعر بالإرهاق حتى عندما تكون مهام العمل عادية."
+},
+
+{
+section:"emotional",
+text:"أشعر أنني أذهب إلى العمل وأنا مثقل نفسيًا."
+},
+
+{
+section:"emotional",
+text:"أشعر أن العمل يترك لدي القليل من الطاقة للحياة خارج العمل."
+},
+
+
+{
+section:"cynicism",
+text:"أصبحت أقل اهتمامًا بمشكلات الأشخاص الذين أتعامل معهم في العمل."
+},
+
+{
+section:"cynicism",
+text:"أصبحت أتعامل مع الآخرين ببرود أكثر من السابق."
+},
+
+{
+section:"cynicism",
+text:"أشعر بالضيق من كثرة طلبات الآخرين في العمل."
+},
+
+{
+section:"cynicism",
+text:"أفضل أحيانًا تقليل التواصل مع الآخرين أثناء العمل."
+},
+
+{
+section:"cynicism",
+text:"أصبحت أقل صبرًا مع العملاء أو الزملاء."
+},
+
+{
+section:"cynicism",
+text:"أصبحت أكثر سلبية تجاه بعض المواقف التي تحدث في العمل."
+},
+
+{
+section:"cynicism",
+text:"أشعر أن تعاطفي مع الآخرين في العمل أصبح أقل من السابق."
+},
+
+{
+section:"cynicism",
+text:"أشعر أحيانًا أنني أتعامل مع الآخرين باعتبارهم جزءًا من العمل فقط."
+},
+
+
+{
+section:"achievement",
+text:"أشعر أنني أؤدي عملي بكفاءة."
+},
+
+{
+section:"achievement",
+text:"أشعر أنني أحقق إنجازات مهمة من خلال عملي."
+},
+
+{
+section:"achievement",
+text:"أستطيع التعامل مع مشكلات العمل بفاعلية."
+},
+
+{
+section:"achievement",
+text:"أشعر أن عملي له قيمة ومعنى."
+},
+
+{
+section:"achievement",
+text:"أشعر أنني أقدم مساهمة مهمة في مكان عملي."
+},
+
+{
+section:"achievement",
+text:"أشعر بالرضا عن مستوى أدائي المهني."
+},
+
+{
+section:"achievement",
+text:"أشعر أنني قادر على التعامل مع متطلبات العمل المختلفة."
+},
+
+{
+section:"achievement",
+text:"أشعر أن لدي القدرة على مساعدة الآخرين من خلال عملي."
+},
+
+{
+section:"achievement",
+text:"أشعر بالفخر بما أحققه في عملي."
+},
+
+{
+section:"achievement",
+text:"أشعر أنني أستطيع تحقيق نتائج جيدة رغم صعوبات العمل."
+}
+
+];
+
+
+const answerOptions = [
+
+{
+score:0,
+label:"أبدًا"
+},
+
+{
+score:1,
+label:"نادرًا جدًا"
+},
+
+{
+score:2,
+label:"نادرًا"
+},
+
+{
+score:3,
+label:"أحيانًا"
+},
+
+{
+score:4,
+label:"غالبًا"
+},
+
+{
+score:5,
+label:"دائمًا"
+}
+
+];
+
+
+let currentQuestion = 0;
+
+let responses = [];
+
+
+/* =========================
+   START
+========================= */
+
+function startAssessment() {
+
+    const name =
+        document.getElementById("fullName").value.trim();
+
+    const job =
+        document.getElementById("jobTitle").value.trim();
+
+    const org =
+        document.getElementById("organization").value.trim();
+
+
+    document.getElementById("nameError").style.display =
+        "none";
+
+    document.getElementById("jobError").style.display =
+        "none";
+
+    document.getElementById("organizationError").style.display =
+        "none";
+
+
+    let valid = true;
+
+
+    if(!name) {
+
+        document.getElementById("nameError").style.display =
+            "block";
+
+        valid = false;
+    }
+
+
+    if(!job) {
+
+        document.getElementById("jobError").style.display =
+            "block";
+
+        valid = false;
+    }
+
+
+    if(!org) {
+
+        document.getElementById("organizationError").style.display =
+            "block";
+
+        valid = false;
+    }
+
+
+    if(!valid) return;
+
+
+    localStorage.setItem("participantName",name);
+
+    localStorage.setItem("participantJob",job);
+
+    localStorage.setItem("participantOrganization",org);
+
+
+    currentQuestion = 0;
+
+    responses = [];
+
+
+    document.getElementById("startPage")
+        .classList.add("hidden");
+
+    document.getElementById("assessmentPage")
+        .classList.remove("hidden");
+
+
+    window.scrollTo(0,0);
+
+    showQuestion();
+
+}
+
+
+/* =========================
+   SHOW QUESTION
+========================= */
+
+function showQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+
+    document.getElementById("questionNumber").innerText =
+        "السؤال " +
+        (currentQuestion + 1) +
+        " من " +
+        questions.length;
+
+
+    document.getElementById("questionText").innerText =
+        question.text;
+
+
+    const percent =
+        Math.round(
+            ((currentQuestion + 1) / questions.length) * 100
+        );
+
+
+    document.getElementById("progressText").innerText =
+        "السؤال " +
+        (currentQuestion + 1) +
+        " من 30";
+
+
+    document.getElementById("progressPercent").innerText =
+        percent + "%";
+
+
+    document.getElementById("progressBar").style.width =
+        percent + "%";
+
+
+    const badge =
+        document.getElementById("sectionBadge");
+
+
+    if(question.section === "emotional") {
+
+        badge.innerText =
+            "🔴 الاستنزاف والإجهاد العاطفي";
+
+    }
+
+    else if(question.section === "cynicism") {
+
+        badge.innerText =
+            "🔵 التبلد والسلبية تجاه العمل والآخرين";
+
+    }
+
+    else {
+
+        badge.innerText =
+            "🟢 الشعور بالكفاءة والإنجاز المهني";
+
+    }
+
+
+    const answersContainer =
+        document.getElementById("answers");
+
+
+    answersContainer.innerHTML = "";
+
+
+    answerOptions.forEach(option => {
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "answer-btn";
+
+
+        button.innerHTML = `
+
+            <span>
+                ${option.label}
+            </span>
+
+            <span class="answer-score">
+                ${option.score}
+            </span>
+
+        `;
+
+
+        button.onclick =
+            () => selectAnswer(option.score);
+
+
+        answersContainer.appendChild(button);
+
+    });
+
+}
+
+
+/* =========================
+   ANSWER
+========================= */
+
+function selectAnswer(score) {
+
+    responses[currentQuestion] = score;
+
+    currentQuestion++;
+
+
+    if(currentQuestion < questions.length) {
+
+        showQuestion();
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+
+    else {
+
+        calculateResults();
+
+    }
+
+}
+
+
+/* =========================
+   RESULTS
+========================= */
+
+function calculateResults() {
+
+    let emotional = 0;
+
+    let cynicism = 0;
+
+    let achievement = 0;
+
+
+    questions.forEach((question,index) => {
+
+        const score =
+            responses[index] || 0;
+
+
+        if(question.section === "emotional") {
+
+            emotional += score;
+
+        }
+
+        else if(question.section === "cynicism") {
+
+            cynicism += score;
+
+        }
+
+        else {
+
+            achievement += score;
+
+        }
+
+    });
+
+
+    document.getElementById("assessmentPage")
+        .classList.add("hidden");
+
+
+    document.getElementById("resultPage")
+        .classList.remove("hidden");
+
+
+    const name =
+        localStorage.getItem("participantName") || "";
+
+    const job =
+        localStorage.getItem("participantJob") || "";
+
+    const org =
+        localStorage.getItem("participantOrganization") || "";
+
+
+    document.getElementById("personInfo").innerHTML = `
+
+        <strong>${name}</strong><br>
+
+        ${job}<br>
+
+        ${org}
+
+    `;
+
+
+    /* Emotional */
+
+    document.getElementById("emotionalScore").innerText =
+        emotional + " / 60";
+
+
+    document.getElementById("emotionalLevel").innerText =
+        emotionalLevel(emotional);
+
+
+    document.getElementById("emotionalFill").style.width =
+        ((emotional / 60) * 100) + "%";
+
+
+    /* Cynicism */
+
+    document.getElementById("cynicismScore").innerText =
+        cynicism + " / 40";
+
+
+    document.getElementById("cynicismLevel").innerText =
+        cynicismLevel(cynicism);
+
+
+    document.getElementById("cynicismFill").style.width =
+        ((cynicism / 40) * 100) + "%";
+
+
+    /* Achievement */
+
+    document.getElementById("achievementScore").innerText =
+        achievement + " / 50";
+
+
+    document.getElementById("achievementLevel").innerText =
+        achievementLevel(achievement);
+
+
+    document.getElementById("achievementFill").style.width =
+        ((achievement / 50) * 100) + "%";
+
+
+    showFinalInterpretation(
+        emotional,
+        cynicism,
+        achievement
+    );
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   LEVELS
+========================= */
+
+function emotionalLevel(score) {
+
+    if(score <= 15)
+        return "🟢 منخفض";
+
+    if(score <= 30)
+        return "🟡 متوسط";
+
+    if(score <= 45)
+        return "🟠 مرتفع";
+
+    return "🔴 مرتفع جدًا";
+
+}
+
+
+function cynicismLevel(score) {
+
+    if(score <= 10)
+        return "🟢 منخفض";
+
+    if(score <= 20)
+        return "🟡 متوسط";
+
+    if(score <= 30)
+        return "🟠 مرتفع";
+
+    return "🔴 مرتفع جدًا";
+
+}
+
+
+function achievementLevel(score) {
+
+    if(score >= 39)
+        return "🟢 كفاءة وإنجاز مرتفعان";
+
+    if(score >= 26)
+        return "🟢 كفاءة جيدة";
+
+    if(score >= 13)
+        return "🟡 كفاءة منخفضة نسبيًا";
+
+    return "🔴 كفاءة وإنجاز منخفضان جدًا";
+
+}
+
+
+/* =========================
+   FINAL INTERPRETATION
+========================= */
+
+function showFinalInterpretation(
+    emotional,
+    cynicism,
+    achievement
+) {
+
+    let title = "";
+
+    let text = "";
+
+
+    if(
+        emotional >= 46 &&
+        cynicism >= 31 &&
+        achievement <= 12
+    ) {
+
+        title =
+            "🔴 مؤشرات قوية للاحتراق الوظيفي";
+
+        text =
+            "تظهر النتيجة ارتفاعًا واضحًا في الاستنزاف العاطفي والتبلد أو السلبية، بالتزامن مع انخفاض كبير في الشعور بالكفاءة والإنجاز. يوصى بمراجعة مصادر الضغط وتنظيم أعباء العمل والراحة والتوازن بين العمل والحياة، والاستعانة بمتخصص مؤهل إذا كانت هذه الضغوط تؤثر بصورة كبيرة على صحتك أو حياتك.";
+
+    }
+
+    else if(
+        emotional >= 31 &&
+        cynicism >= 21
+    ) {
+
+        title =
+            "🟠 مستوى مرتفع من مؤشرات الاحتراق";
+
+        text =
+            "توجد مؤشرات واضحة على الاستنزاف والتبلد تجاه العمل. من المهم الانتباه إلى مصادر الضغط المستمرة، ومراجعة حجم المسؤوليات، ووضع حدود صحية للعمل مع تخصيص وقت كافٍ للتعافي والراحة.";
+
+    }
+
+    else if(
+        emotional >= 16 ||
+        cynicism >= 11 ||
+        achievement <= 38
+    ) {
+
+        title =
+            "🟡 مستوى متوسط";
+
+        text =
+            "توجد بعض مؤشرات الضغط أو الاستنزاف التي تستحق الانتباه. يمكن أن يساعد تنظيم الأولويات، وأخذ فترات راحة منتظمة، ومراجعة مصادر الضغط، وتعزيز الأنشطة التي تعيد الإحساس بالإنجاز.";
+
+    }
+
+    else {
+
+        title =
+            "🟢 مستوى منخفض";
+
+        text =
+            "مؤشرات الاستنزاف والتبلد منخفضة بصورة عامة، مع شعور جيد بالكفاءة والإنجاز. حافظ على الممارسات التي تدعم التوازن بين العمل والحياة وعلى فترات الراحة والاستشفاء المنتظمة.";
+
+    }
+
+
+    document.getElementById("finalTitle").innerText =
+        title;
+
+
+    document.getElementById("finalInterpretation").innerText =
+        text;
+
+}
+
+
+/* =========================
+   RESTART
+========================= */
+
+function restartAssessment() {
+
+    responses = [];
+
+    currentQuestion = 0;
+
+
+    document.getElementById("resultPage")
+        .classList.add("hidden");
+
+
+    document.getElementById("startPage")
+        .classList.remove("hidden");
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
